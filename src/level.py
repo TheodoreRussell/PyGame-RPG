@@ -9,16 +9,15 @@ from tile import Tile
 from player import Player
 from settings import TILE_SIZE
 import random
+from groups import YSortCameraGroup
 
 class Level:
     def __init__(self):
         # get display surface
         self.display = pygame.display.get_surface()
-        self.visible_sprites = pygame.sprite.Group()
+        self.visible_sprites = YSortCameraGroup(self.display)
         self.collision_sprites = pygame.sprite.Group()
-        
-        
-        
+            
         self.load_level()
         
     def load_level(self):
@@ -39,8 +38,8 @@ class Level:
                 if col == 'x':
                     Tile(pygame.Vector2(x, y), [self.visible_sprites, self.collision_sprites])
                 if col == 'p':
-                    Player(pygame.Vector2(x, y), [self.visible_sprites], self.collision_sprites)
+                    self.player = Player(pygame.Vector2(x, y), [self.visible_sprites], self.collision_sprites)
     
     def run(self):
-        self.visible_sprites.draw(self.display)
+        self.visible_sprites.custom_draw(self.player.rect.center)
         self.visible_sprites.update()
