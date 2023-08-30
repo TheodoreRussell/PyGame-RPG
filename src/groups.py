@@ -16,6 +16,6 @@ class YSortCameraGroup(pygame.sprite.Group):
         # Camera Pos = Player pos for basic static tracking
         offset = pygame.math.Vector2(camera_pos) - self.window_half_size
         
-        for sprite in self.sprites():
+        for sprite in sorted(self.sprites(), key = lambda sprite: sprite.rect.centery ):
             offset_pos = sprite.rect.topleft - offset
             self.display.blit(sprite.image, offset_pos)
