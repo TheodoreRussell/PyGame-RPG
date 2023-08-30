@@ -7,3 +7,5 @@ Created on Wed Aug 30 15:21:22 2023
 
 WIDTH = 900
 HEIGHT = 900
+FPS = 60
+TILE_SIZE = 16
